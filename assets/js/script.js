@@ -134,6 +134,51 @@ for (let i = 0; i < formInputs.length; i++) {
   });
 }
 
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
+  e.preventDefault(); // Prevent page reload
+
+  // Get form data
+  const fullName = document.querySelector("[name='fullname']").value.trim();
+  const email = document.querySelector("[name='email']").value.trim();
+  const message = document.querySelector("[name='message']").value.trim();
+  const formResponse = document.getElementById("formResponse");
+
+  // Validate form fields
+  if (!fullName || !email || !message) {
+    formResponse.innerText = "⚠️ Please fill in all fields.";
+    formResponse.style.color = "red";
+    return;
+  }
+
+  formResponse.innerText = "Sending message...";
+  formResponse.style.color = "blue";
+
+  // Send data to Next.js API (Vercel) instead of PHP
+  try {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fullname: fullName, email, message }),
+    });
+
+    const result = await response.json();
+    formResponse.innerText = result.message;
+
+    if (result.success) {
+      formResponse.style.color = "green";
+      document.getElementById("contactForm").reset(); // Clear form
+    } else {
+      formResponse.style.color = "red";
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    formResponse.innerText = "⚠️ Failed to send message. Try again.";
+    formResponse.style.color = "red";
+  }
+});
+
+
+
 
 
 // page navigation variables
