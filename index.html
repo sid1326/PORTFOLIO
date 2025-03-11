@@ -790,60 +790,31 @@
     </figure>
   </section>
 
-  <section class="contact-form">
-    <h3 class="h3 form-title">Contact Form</h3>
+   <section class="contact-form">
 
-    <form id="contact-form">
-    <input type="text" id="fullname" name="fullname" placeholder="Your Name" required>
-    <input type="email" id="email" name="email" placeholder="Your Email" required>
-    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
+          <h3 class="h3 form-title">Reach Out Here</h3>
+
+         <section class="contact-form">
+   
+
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSc4npTuDtbM9nMXZobj_CTIVpcPqPQkWq94gvMwzvn7NzpHsQ/viewform" method="GET" target="_blank">
+    <button class="form-btn" type="submit">
+        <ion-icon name="paper-plane"></ion-icon>
+        <span>Send Message</span>
+    </button>
 </form>
 
-<p id="response-message"></p>
+</section>
 
-<script>
-  document.getElementById("contact-form").addEventListener("submit", async function (event) {
-    event.preventDefault();
-    
-    const fullname = document.getElementById("fullname").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
-
-    const responseMessage = document.getElementById("response-message");
-    responseMessage.textContent = "Sending message...";
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fullname, email, message }),
-      });
-
-      const result = await response.json();
-      responseMessage.textContent = result.message;
-
-      if (result.success) {
-        document.getElementById("contact-form").reset();
-      }
-    } catch (error) {
-      responseMessage.textContent = "Error sending message. Please try again.";
-    }
-  });
-</script>
-
-
-</article>
 
       
-    </div>
+
+        </section>
+
+</article>
+     </div>
 
   </main>
-
-
-
-
-
 
   <!--
     - custom js link
